@@ -48,6 +48,21 @@ Prefer `/tmp/opencode`. It may be root-owned and unwritable — fall back to a t
 
 **Filesystem artifact:** this overlay filesystem creates AppleDouble `._*` files on writes. Delete them on sight; never commit them (root and widellama `.gitignore` carry `*._*`). Scripts may have lost their exec bit in git — use `git update-index --chmod=+x`. `.git/objects/pack/._pack-*` paths produce `non-monotonic index` warnings on every git command — harmless; do **not** hand-delete anything under `.git/`.
 
+## Container restart
+
+This dev container is ephemeral; the `/workspace` checkout and docker volumes persist. Everything is already committed and pushed in all three repos (`main`/`development` in sync everywhere), so a restart starts from a clean state.
+
+**On rebuild, run `./start.sh`** — restores `gh` auth, the `~/.profile` SSH workaround, and the local inference server (`http://api:8000/v1`, `model.gguf` lives in the `code-inference_model_data` docker volume; `widellama-workspace_model_data` is empty and only needed for `./download_qwen.sh` GGUF copies).
+
+Facts that bite on restart:
+
+- **Skills are git-ignored** — payloads in `.agents/`, `.claude/`, `.grok/`, `.hermes/`/skills are local, not committed. `skills-lock.json` (tracked) records sources/hashes — reinstall if wiped. `.grok/` and `.hermes/` include `specv1` (aligned 2026-11-16).
+- **`gh` may be stale** — if `gh` calls return `HTTP 401`, run `unset GH_TOKEN && gh auth login --git-protocol ssh --web`.
+- **`docker` works** — the daemon is reachable; model volumes persist per project (see above).
+- **Widellama product** runs only in Docker; tests via `./scripts/widellama-pytest.sh` inside the image, never on the host (ADR-0008).
+- **The three repos and their flow**: `widellama-workspace` (this one), `widellama`, `widellama-product-specs` — all GHW (topic branch → PR → `development` → release PR → `main`, SemVer tags). `widellama-product-specs` has `verify` CI on PRs/pushes; `widellama` gates on `pytest` (+ `main-pr-source.yml` for `main`).
+- **`._*` AppleDouble files** reappear on every write — they're git-ignored everywhere; ignore them, never commit them.
+
 ## Verification
 
 At root the only check is `pre-commit run --all-files`. For subfolders, use whatever that repo defines (e.g. widellama: pytest inside Docker, never on the host).
