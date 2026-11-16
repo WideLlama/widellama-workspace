@@ -7,6 +7,12 @@
       "skillPath": "GHW/SKILL.md",
       "computedHash": "2ca252d565794f09d0284e0e127496a496dbd2b2a4dd0aacfc11e2c857187090"
     },
+    "SPECv1": {
+      "source": "agentic-framework-skills/SPECv1",
+      "sourceType": "github",
+      "skillPath": "SPECv1/SKILL.md",
+      "computedHash": "2d976cd38f1374944e24f1b0bea0a645a8e4ccff94769305f3c6444585bda673"
+    },
     "hud-setup": {
       "source": "VibeLeading/hud-setup",
       "sourceType": "github",
