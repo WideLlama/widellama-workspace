@@ -24,7 +24,7 @@
 
 ## Git workflow
 
-The `ghw` skill is canonical; `.opencode/instructions/git-workflow.md` (auto-loaded) is a thin pointer to it plus instance SSH/auth. Summary: topic branches from `development` (`feature/`/`fix/`/`bugfix/` — auto-PR covers exactly these), no rebase, PRs into `development`, `development` → `main` via release PR. Applies to subfolder repos too; subfolders must not override it. Root remotes: `origin` = fork (`WideLlama/widellama-workspace`), `upstream` = template (`jeanmachuca/aiworkspace`). `origin/development` was created from `main` — keep it fast-forwarded; `main` accepts PRs only from `development` (`main-pr-source.yml`).
+The `ghw` skill is canonical; `.opencode/instructions/git-workflow.md` (auto-loaded) is a thin pointer to it plus instance SSH/auth. Summary: topic branches from `development` (`feature/`/`fix/`/`bugfix/` — auto-PR covers exactly these), no rebase, PRs into `development`, `development` → `main` via release PR. Applies to subfolder repos too; subfolders must not override it. All three WideLlama org repos — `widellama-workspace`, `widellama`, `widellama-product-specs` — carry `development` and follow GHW end-to-end: topic branch → PR → `development`, then `development` → `main` release PR with a SemVer tag. Root remotes: `origin` = fork (`WideLlama/widellama-workspace`), `upstream` = template (`jeanmachuca/aiworkspace`) — scaffolding reference; **never push to `upstream`**. `origin/development` is this repo's integration line; `main` accepts PRs only from `development` (`main-pr-source.yml`).
 
 ## Vibe Leading (methodology)
 
