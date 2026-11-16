@@ -42,5 +42,40 @@
     "AGENTS.md",
     ".opencode/instructions/git-workflow.md",
     "nacedigital-landing-page/.opencode/instructions/secrets.md"
-  ]
+  ],
+      "mcp": {
+    "mcp-hybrid-data-engine": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@vibeleading/mcp-hybrid-data-engine"
+      ]
+    },
+    "mcp-document-architect": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@vibeleading/mcp-document-architect"
+      ]
+    },
+    "mcp-real-time-scout": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@vibeleading/mcp-real-time-scout"
+      ]
+    },
+    "mcp-privacy-shield": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@vibeleading/mcp-privacy-shield"
+      ]
+    }
+  }
+
 }
