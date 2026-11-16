@@ -46,6 +46,8 @@ They guide *how work is directed and reviewed*, not code conventions. Use them p
 
 Prefer `/tmp/opencode`. It may be root-owned and unwritable — fall back to a temp subdirectory under `/workspace` rather than other system temp dirs.
 
+**Filesystem artifact:** this overlay filesystem creates AppleDouble `._*` files on writes. Delete them on sight; never commit them (root and widellama `.gitignore` carry `*._*`). Scripts may have lost their exec bit in git — use `git update-index --chmod=+x`. `.git/objects/pack/._pack-*` paths produce `non-monotonic index` warnings on every git command — harmless; do **not** hand-delete anything under `.git/`.
+
 ## Verification
 
 At root the only check is `pre-commit run --all-files`. For subfolders, use whatever that repo defines (e.g. widellama: pytest inside Docker, never on the host).
