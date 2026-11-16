@@ -28,7 +28,7 @@ One `git clone` and you get a battle-tested structure where:
 |------|----------------|
 | `AGENTS.md` | Tells any AI agent the workspace layout, tooling, and conventions |
 | `opencode.json` | OpenCode config with local + cloud model presets |
-| `.opencode/instructions/git-workflow.md` | Branch/PR/release conventions loaded automatically |
+| `.opencode/instructions/git-workflow.md` | GHW skill pointer + instance SSH/auth, loaded automatically |
 | `.github/workflows/` | Auto-PR, main protection, CI/test/publish templates |
 | `.pre-commit-config.yaml` | Pre-commit hooks (trailing whitespace, YAML, large files) |
 | `start.sh` | Single‑command container bootstrap |
@@ -70,14 +70,24 @@ feature/fix/bugfix branch → PR → `development` → PR → `main` → SemVer 
 
 The auto-PR workflow opens a PR to `development` automatically whenever a `feature/*`, `fix/*`, or `bugfix/*` branch is pushed. The `main` branch accepts PRs only from `development`.
 
-See [`.opencode/instructions/git-workflow.md`](.opencode/instructions/git-workflow.md) for details.
+The canonical rules live in the `ghw` skill (locked in `skills-lock.json`), wired into sessions via [`.opencode/instructions/git-workflow.md`](.opencode/instructions/git-workflow.md).
+
+## Vibe Leading
+
+This workspace adopts the **Vibe Leading** methodology for directing AI-assisted work. The skills are locked in `skills-lock.json` and auto-available in OpenCode sessions — agents reach for them proactively when a task involves intent, telemetry, team/agent structure, prompt quality, or calibration:
+
+- **mission-script** — strategic intent (the Vibe) written as a spec for agents and deliverables
+- **hud-setup** — the Scoreboard HUD (IRA thresholds, Circuit Delta) replacing status meetings
+- **org-geometry** — Diamond Squad design and NPC agent roles
+- **ira-prompting** — the seven IRA prompting techniques, scored with the IRA rubric
+- **pit-stop-audit** — calibration at Lap end / month-end / kickoff (Pit Stop, Vibe Audit, Pilot's Final Checklist)
 
 ## CI workflows
 
 - **open-pr-to-development.yml** — auto‑opens PR when pushing `feature/*`, `fix/*`, `bugfix/*`
 - **main-pr-source.yml** — enforces that PRs to `main` originate from `development`
 - **CI** — placeholder (replace with your test/lint commands)
-- **publish.yml** — commented template for GHCR Docker image publishing
+- **publish.yml** — complete GHCR build+push of the root `Dockerfile` on `main` and `v*` tags (no test stage)
 
 ## Container bootstrap
 
