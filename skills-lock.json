@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "skills": {
+    "GHW": {
+      "source": "agentic-framework-skills/GHW",
+      "sourceType": "github",
+      "skillPath": "GHW/SKILL.md",
+      "computedHash": "2ca252d565794f09d0284e0e127496a496dbd2b2a4dd0aacfc11e2c857187090"
+    },
+    "hud-setup": {
+      "source": "VibeLeading/hud-setup",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "ce0cedc65a42efba4773689ea1eac01a8f747d16a1ec1d9e8ec79c40ef2fdc30"
+    },
+    "ira-prompting": {
+      "source": "VibeLeading/ira-prompting",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "f6da875e6d7c583b403335af1f56c032f26c6966ec516fec87932c176991704f"
+    },
+    "mission-script": {
+      "source": "VibeLeading/mission-script",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "c2277ffe646af4e89d8938f64e613b0b3889d3a08762e49a2fc4831936d123a4"
+    },
+    "org-geometry": {
+      "source": "VibeLeading/org-geometry",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "01081748eb6a7f75ab0d271e6a8fea0b471f940c6c14eed037a2458edca1f7ef"
+    },
+    "pit-stop-audit": {
+      "source": "VibeLeading/pit-stop-audit",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "73b033e302c15e806630ad239fd9600b3e14c77799be76e5b2b7a43e7413f49c"
+    }
+  }
+}
