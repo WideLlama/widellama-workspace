@@ -52,13 +52,18 @@ Prefer `/tmp/opencode`. It may be root-owned and unwritable — fall back to a t
 
 This dev container is ephemeral; the `/workspace` checkout and docker volumes persist. Everything is already committed and pushed in all three repos (`main`/`development` in sync everywhere), so a restart starts from a clean state.
 
-**On rebuild, run `./start.sh`** — restores `gh` auth, the `~/.profile` SSH workaround, and the local inference server (`http://api:8000/v1`, `model.gguf` lives in the `code-inference_model_data` docker volume; `widellama-workspace_model_data` is empty and only needed for `./download_qwen.sh` GGUF copies).
+**On rebuild** — the bring-up is **instance-specific and not encoded here**: the root `start.sh`, `start-container.sh`, `download_qwen.sh`, `Dockerfile`, and the template README are **stale files from the workspace template** and do not apply to this fork (`WideLlama/widellama-workspace`). Do not wire them into a restart. The user re-enables the workspace on rebuild (enablement has not happened yet at time of writing).
+
+**Read first, in order:**
+
+1. `.handoff/README.md` — full state snapshot, session history, open decisions, verification checklist.
+2. `.vibe/` — Vibe Leading artifacts for this program (mission, HUD, org geometry, pit-stop).
 
 Facts that bite on restart:
 
 - **Skills are git-ignored** — payloads in `.agents/`, `.claude/`, `.grok/`, `.hermes/`/skills are local, not committed. `skills-lock.json` (tracked) records sources/hashes — reinstall if wiped. `.grok/` and `.hermes/` include `specv1` (aligned 2026-11-16).
 - **`gh` may be stale** — if `gh` calls return `HTTP 401`, run `unset GH_TOKEN && gh auth login --git-protocol ssh --web`.
-- **`docker` works** — the daemon is reachable; model volumes persist per project (see above).
+- **dockerd is reachable** — but the template's `code-inference_model_data` volume story does not carry over to this workspace; treat it as context, not as setup.
 - **Widellama product** runs only in Docker; tests via `./scripts/widellama-pytest.sh` inside the image, never on the host (ADR-0008).
 - **The three repos and their flow**: `widellama-workspace` (this one), `widellama`, `widellama-product-specs` — all GHW (topic branch → PR → `development` → release PR → `main`, SemVer tags). `widellama-product-specs` has `verify` CI on PRs/pushes; `widellama` gates on `pytest` (+ `main-pr-source.yml` for `main`).
 - **`._*` AppleDouble files** reappear on every write — they're git-ignored everywhere; ignore them, never commit them.

@@ -5,6 +5,10 @@
 !/.github/
 !/.opencode/
 
+# And the restart-readiness artifacts for the next session
+!/.handoff/
+!/.vibe/
+
 # Dependencies
 node_modules/
 
