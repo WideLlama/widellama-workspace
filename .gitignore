@@ -14,3 +14,4 @@ sessions/
 package.json
 package-lock.json
 .fuse*
+*._*
